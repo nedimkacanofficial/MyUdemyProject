@@ -1,4 +1,5 @@
 ﻿using HotelProject.BusinessLayer.Abstract;
+using HotelProject.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,19 +29,23 @@ namespace HotelProject.WebApi.Controllers
             return Ok(staff);
         }
         [HttpPost]
-        public IActionResult AddStaff()
+        public IActionResult AddStaff([FromBody] Staff staff)
         {
-            return Ok();
+            this._staffService.TInsert(staff);
+            return Ok(staff);
         }
         [HttpPut]
-        public IActionResult UpdateStaff()
+        public IActionResult UpdateStaff([FromBody] Staff staff)
         {
-            return Ok();
+            this._staffService.TUpdate(staff);
+            return Ok(staff);
         }
         [HttpDelete]
-        public IActionResult DeleteStaff()
+        public IActionResult DeleteStaff([FromRoute] int id)
         {
-            return Ok();
+            var staff = this._staffService.TGetById(id);
+            this._staffService.TDelete(staff);
+            return Ok(staff);
         }
     }
 }

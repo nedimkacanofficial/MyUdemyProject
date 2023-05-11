@@ -1,4 +1,5 @@
 ﻿using HotelProject.BusinessLayer.Abstract;
+using HotelProject.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,19 +29,23 @@ namespace HotelProject.WebApi.Controllers
             return Ok(staff);
         }
         [HttpPost]
-        public IActionResult AddSubscribe()
+        public IActionResult AddSubscribe([FromBody] Subscribe subscribe)
         {
-            return Ok();
+            this._subscribeService.TInsert(subscribe);
+            return Ok(subscribe);
         }
         [HttpPut]
-        public IActionResult UpdateSubscribe()
+        public IActionResult UpdateSubscribe([FromBody] Subscribe subscribe)
         {
-            return Ok();
+            this._subscribeService.TUpdate(subscribe);
+            return Ok(subscribe);
         }
         [HttpDelete]
-        public IActionResult DeleteSubscribe()
+        public IActionResult DeleteSubscribe([FromRoute] int id)
         {
-            return Ok();
+            var subscribe = this._subscribeService.TGetById(id);
+            this._subscribeService.TDelete(subscribe);
+            return Ok(subscribe);
         }
     }
 }

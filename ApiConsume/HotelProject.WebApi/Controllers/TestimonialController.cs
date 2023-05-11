@@ -1,4 +1,5 @@
 ﻿using HotelProject.BusinessLayer.Abstract;
+using HotelProject.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,19 +29,23 @@ namespace HotelProject.WebApi.Controllers
             return Ok(testimonial);
         }
         [HttpPost]
-        public IActionResult AddTestimonial()
+        public IActionResult AddTestimonial([FromBody] Testimonial testimonial)
         {
-            return Ok();
+            this._testimonialService.TInsert(testimonial);
+            return Ok(testimonial);
         }
         [HttpPut] 
-        public IActionResult UpdateTestimonial() 
+        public IActionResult UpdateTestimonial([FromBody] Testimonial testimonial) 
         {
-            return Ok();
+            this._testimonialService.TUpdate(testimonial);
+            return Ok(testimonial);
         }
         [HttpDelete]
-        public IActionResult DeleteTestimonial()
+        public IActionResult DeleteTestimonial([FromRoute] int id)
         {
-            return Ok();
+            var testimonial = this._testimonialService.TGetById(id);
+            this._testimonialService.TDelete(testimonial);
+            return Ok(testimonial);
         }
     }
 }
