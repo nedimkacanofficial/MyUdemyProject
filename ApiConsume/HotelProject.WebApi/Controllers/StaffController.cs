@@ -40,12 +40,12 @@ namespace HotelProject.WebApi.Controllers
             this._staffService.TUpdate(staff);
             return Ok(staff);
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteStaff([FromRoute] int id)
         {
             var staff = this._staffService.TGetById(id);
             this._staffService.TDelete(staff);
-            return Ok(staff);
+            return Ok();
         }
     }
 }

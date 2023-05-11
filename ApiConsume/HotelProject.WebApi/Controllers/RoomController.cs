@@ -40,7 +40,7 @@ namespace HotelProject.WebApi.Controllers
             this._roomService.TUpdate(room);
             return Ok(room);
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteRoom([FromRoute] int id)
         {
             var room = this._roomService.TGetById(id);

@@ -40,7 +40,7 @@ namespace HotelProject.WebApi.Controllers
             this._subscribeService.TUpdate(subscribe);
             return Ok(subscribe);
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteSubscribe([FromRoute] int id)
         {
             var subscribe = this._subscribeService.TGetById(id);
